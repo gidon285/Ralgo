@@ -17,12 +17,12 @@ def safe_call(*args):
     f_given = parse_annons(f)
     types = prepare_arr(f_given)
     if len(variables) < len(types):
-        raise TypeError("type error")
+        raise TypeError
     for i in range(len(types)):
         if types[i] == "none":
             continue
         if parse_type_txt(str(type(variables[i]))) != types[i]:
-            raise TypeError("type error")
+            raise TypeError
     return f(*tuple(variables))
 def prepare_arr(arr:list) -> list:
     """returns a list that has each variable type, and none if type isnt in annotations."""
@@ -54,28 +54,13 @@ def f_out_args(arguments):
         else:
             lst.append(arg)
     return (f, lst)
-def fails():
-    """ tests for checking bad input"""
-    try:
-        safe_call(f1,2.5,3.5)
-        safe_call(f1,"hell",3)
-        safe_call(f1,'s',3)
-        safe_call(f2, -2, "good luck")
-        safe_call(f2, 230, 2)
-        safe_call(f2, 230, -59)
-        safe_call(f3, 45, -2)
-        safe_call(f3, 77.12, -23)
-        safe_call(f3, 77/25, (36*2))
-    except TypeError:
-        pass
-    print("8 bad inputs went ok. ")
-# wins()
 "======================================================================="
 "=========================      Q two with tests     ==================="
 
 def print_sorted(*args):
     for arg in args:
         print(req(arg))
+    return args
 def req(arg):
     if isinstance(arg, dict):
             #dict
@@ -118,12 +103,7 @@ def sort_dict(myd):
     for k in keys:
         ans[k] = myd[k]
     return ans
-
-# x = {"a":5,"c":6,"b":[1,3,"2",2,4],"dic":{"a":1,"b":2},"tuple":(1,6,2,3,9)}
-# t = ("c","a",[1,3,2,4],{"b":1,"a":2},(1,6,2,3,9))
-# l = ["c","a",[1,3,2,4],{"b":1,"a":2},(1,6,2,3,9)]
-# print_sorted(l)
-
+    
 "======================================================================="
 "=========================      Q three with test    ==================="
 epsilon = 0.005
