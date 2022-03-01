@@ -1,4 +1,5 @@
 import unittest
+import math
 import ex1 as ex1
 class TestStringMethods(unittest.TestCase):
     """ testing !- testing Q1"""
@@ -46,6 +47,8 @@ class TestStringMethods(unittest.TestCase):
 
     """ testing !- testing Q3"""
     def test_1(self):
-        ex1.
+        self.assertEqual(1.414213562373095, ex1.find_root(lambda x: x**2-2,1,4))
+        self.assertEqual(1.5596104694623694, ex1.find_root( lambda x: (math.pow(x, x) - 2),0,5))
+       
 if __name__ == '__main__':
     unittest.main()
