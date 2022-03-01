@@ -54,21 +54,6 @@ def f_out_args(arguments):
         else:
             lst.append(arg)
     return (f, lst)
-  
-def wins():
-    """ tests for checking good input"""
-    assert 5.5 == safe_call(f1,2,3.5) 
-    assert 5 == safe_call(f1,2,3) 
-    assert 1.5 == safe_call(f2, -2, 3.5)
-    assert 3.5 == safe_call(f2, 2, 1.5)
-    assert "hello world" == safe_call(f3, "hello", " world")
-    assert "worldhello" == safe_call(f3, "world", "hello")
-    assert "worldhello" == safe_call(f4, "world", "hello")
-    x = 1 
-    y = 8
-    assert 9 == safe_call(f4, x, y)
-    print("8 good inputs went ok.")
-
 def fails():
     """ tests for checking bad input"""
     try:
