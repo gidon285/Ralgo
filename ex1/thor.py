@@ -26,8 +26,12 @@ while True:
         elif ty < light_y:
             x = "S"
             ty = ty + 1
-
+            
+    elif ty == light_y:
+        print("PL")
     
+    elif tx != light_x and ty != light_y:
+        print("PL")
         
     # Write an action using print
     # To debug: print("Debug messages...", file=sys.stderr)
