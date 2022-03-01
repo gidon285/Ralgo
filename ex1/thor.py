@@ -28,10 +28,30 @@ while True:
             ty = ty + 1
             
     elif ty == light_y:
-        print("PL")
+        if tx > light_x:
+            x = "W"
+            tx = tx - 1
+        elif tx < light_x:
+            y = "E"
+            tx = tx + 1
     
     elif tx != light_x and ty != light_y:
-        print("PL")
+        if ty > light_y and tx > light_x :
+            y = "NW"
+            tx = tx - 1
+            ty = ty - 1
+        elif ty > light_y and tx < light_x :
+            y = "NE"
+            tx = tx + 1
+            ty = ty - 1
+        elif ty < light_y and tx > light_x :
+            x = "SW"
+            tx = tx - 1
+            ty = ty + 1
+        elif ty < light_y and tx < light_x :
+            x = "SE"
+            tx = tx + 1
+            ty = ty + 1
         
     # Write an action using print
     # To debug: print("Debug messages...", file=sys.stderr)
