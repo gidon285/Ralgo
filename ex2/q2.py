@@ -1,25 +1,25 @@
-def wrap(func1):
-    def wrapper():
-        print("inner wrap")
-        func1()
-        print("end of wrap")
+flag = None
+def lastcall(func1):
+    def wrapper(*args, **kwargs):
+        global flag
+        var = args[0]
+        if flag is None:
+            flag = args[0]
+            return "the answer is: " + str(func1(flag))
+        elif flag == var:
+            return "i already told you the answer, it was : " + str(func1(flag))
+        else:
+            flag = var
+            return "the answer is: " + str(func1(flag)) 
+    
     return wrapper
     
-@wrap
+@lastcall
 def f(x):
-    print(x**2)
+    return x**2
 
-f()
+print(f(3))
+print(f(3))
+print(f(2))
+print(f(2))
 
-# def wrap(func):
-#     def wrapper():
-#         print(f"starting {func.__name__}")
-#         func()
-#         print(f"ending {func.__name__}")
-#     return wrapper
-
-# @wrap
-# def a_function():
-#     print("I'm a new function")
-
-# a_function()
