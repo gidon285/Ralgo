@@ -1,5 +1,7 @@
 def _offset(func):
     def offset(self, *args): 
+        if len(args) == 0:
+            return func(self)
         if isinstance(args[0], int):
             return func(self,(self.lst,args[0]))
         else:
@@ -19,8 +21,11 @@ class List(list):
 
     @_offset
     def __len__(self, *args):
-        ans, index = arg[0]
-        return len(ans[index])
+        if len(args) != 0:
+            ans, index = arg[0]
+            return len(ans[index])
+        else: 
+            return self.lst.__len__()
 
     @_offset
     def __getitem__(self, *args):
@@ -44,28 +49,13 @@ class List(list):
     def __str__(self):
         return self.lst.__str__()
 
-# last = List([ [1,2] ])
-# print(last)
-# last = List([
-#             [1,2],
-#             [2,1]
-# ])
-# print(last)
-# last = List([[1,2],[2,1],[1,2]])
-# last = List([ [1,2] ,[3,4] ])
-# last = List([  [  [1,2],[3,4]   ] ])
-# last = List([  [ [ [1,2],[3,4] ]  ] ])
-last = List([
+arr1 = List([ [1,2] ])
+arr2 = List([ [1,2], [2,1]])
+arr3 = List([ [1,2], [2,1], [3,4] ])
+arr4 = List([ [ [1,2], [3,4] ] ])
+arr5 = List([ [ [ [1,2], [3,4] ] ] ])
+arr6 = List([
     [[1,2,3,33],[4,5,6,66]],
     [[7,8,9,99],[10,11,12,122]],
     [[13,14,15,155],[16,17,18,188]]
 ])
-# print(len(last))
-# print(len(last))
-print(len(last[0,1]))
-print(last[0])
-print(last[0,1,3])
-del(last[0,1,3])
-del(last[2])
-last.append(2)
-print(len(last))

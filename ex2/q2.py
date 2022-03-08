@@ -15,11 +15,11 @@ def lastcall(func1):
     return wrapper
     
 @lastcall
-def f(x):
+def f_int(x):
     return x**2
-
-print(f(3))
-print(f(3))
-print(f(2))
-print(f(2))
-
+@lastcall
+def f_str(x):
+    return str(x) + " wow!"
+@lastcall
+def f_float(x):
+    return x / 0.1
