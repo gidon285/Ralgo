@@ -35,5 +35,5 @@ def doc_for_module(modulepy:str, htmlfile:str):
                                 file.write("<p>{} : {}\n</p>".format(d,dict(annons[annon])[d]))
             file.write(line+"\n")
     
-
-    
+# example:
+# doc_for_module("mymodule.py","mt.html")
