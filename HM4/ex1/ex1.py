@@ -10,13 +10,6 @@ def bounded_subset(lst: list, n: int):
         ans.extend(val for val in [a + [num] for a in ans] if sum(val) <= n)
     return ans
 
-def check_if_contains_list(lst1: list, lst2: list) -> bool:
-    for subset in lst2:
-        if all(x in subset for x in lst1):
-            return True
-    return False
-
-
 class tests(unittest.TestCase):
 
     def test_subsets(self):
