@@ -4,7 +4,9 @@ from scipy.optimize import fsolve
 import numpy as np
 
 def plotInterception(x, f, g):
-    """ first we find the values of each function in each of the points on the x axies, then we try to solve  
+    """ first we find the values of each function in each of the points on the x axie, we use fsolve for that.
+        then we try to save on iterations and add only those who are already been saved, then we use the oppesite action.
+        we compare f(i) = g(i) to see which of the y values are correct, then we plot it all. 
     """
     x_vals = list(x);cross_y= []
     lst_f = [f(i) for i in x_vals ]
