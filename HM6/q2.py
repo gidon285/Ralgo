@@ -1,29 +1,37 @@
 import gspread
-import numpy as np
-
+import pandas as pd
+from fairpy.items import fair_division_under_cardinality_constraints as fducc
+import json
 
 account = gspread.service_account("C:\\Users\\gidon\\OneDrive\\Desktop\\Ralgo\\HM6\\algorithmsq2-1a1003d9fd9d.json")
 spreadsheet = account.open("test")
-sheet1 = spreadsheet.worksheet("Sheet1")
+sheet = spreadsheet.worksheet("Sheet1")
+df = pd.DataFrame(sheet.get_all_records())
 
-# A1 always contains the number of matrix to multiply, thus we create the list that will contain the matrixes.
-t_arr ,arr ,mult = [], [], []
-num_of_col = int(sheet1.acell("A1").value)+1
-num_of_row = int(sheet1.acell("A2").value)+1
+agents_evaluation ={}
+agent_names = []
+catagories = []
+items = dict()
+temp_item = set()
 
-for i in range(1,num_of_col):
-    for j in range(2,num_of_row):
-        string = str(sheet1.cell(i, j).value).replace("[","").replace("]","").split(",")
-        if string is not None:
-            for num in string:
-                t_arr.append(int(num))
-            arr.append(t_arr)
-            t_arr = []
-    mult.append(arr)
-    arr = []
+# 3 agents
+for i in range(0,3):
+    agent = df.loc[i]['agents_names']
+    agent_names.append(agent)
+    evaluation = json.loads("\""+str(df.loc[i]['evaluation'])+"\"")
+    agents_evaluation[agent] = evaluation
 
 
-a = np.array([mult[0],mult[1]])
-b = np.array([mult[3],mult[4]])
+# 2 catagories
+for i in range(0,2):
+    category = df.loc[i]['catagories']
+    catagories.append(category)
+    # x items in each category
+    for j in range(0, df.loc[0]['items']):
+        temp_item.add(df.loc[j][category])
+    items[category] = temp_item
+    temp_item = set()
 
-sheet1.update("A2", str(np.matmul(a,b)))
+d = fducc.Data(catagories,agents_evaluation,items)
+ans = fducc.ef1_algorithm(agent_names,d)
+sheet1.update("G1", "Player X")
