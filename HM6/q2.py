@@ -5,7 +5,7 @@ import json
 
 account = gspread.service_account("C:\\Users\\gidon\\OneDrive\\Desktop\\Ralgo\\HM6\\algorithmsq2-1a1003d9fd9d.json")
 spreadsheet = account.open("test")
-sheet = spreadsheet.worksheet("Sheet1")
+sheet = spreadsheet.worksheet("Input")
 df = pd.DataFrame(sheet.get_all_records())
 
 agents_evaluation ={}
@@ -33,5 +33,10 @@ for i in range(0,2):
     temp_item = set()
 
 d = fducc.Data(catagories,agents_evaluation,items)
+sheet = spreadsheet.worksheet("Output")
 ans = fducc.ef1_algorithm(agent_names,d)
-sheet1.update("G1", "Player X")
+
+index = 0
+for key in ans.keys():
+    sheet.update("G{i}".format(i=index), ans[key])
+    index += 1
